@@ -1,0 +1,573 @@
+// this.table = "window table";
+
+
+
+
+
+
+
+// "this" inside a function
+
+
+
+
+
+
+
+const cleantabale = function(){
+
+
+
+
+
+
+
+    console.log(`cleaning ${this.table}`)
+
+
+
+}
+
+
+
+// cleantabale()  should not access the cleantabale in function giving me undefine coz this is tampalte letral
+
+
+
+cleantabale() //cleaning undefined
+
+
+
+
+
+
+
+// call the function with help of call
+
+
+
+cleantabale.call(this)//cleaning window table
+
+
+
+// console.log(this.table)
+
+
+
+
+
+
+
+this.garage = {
+
+
+
+  table: "garage table",
+
+
+
+};
+
+
+
+
+
+
+
+// "this" inside an object
+
+
+
+
+
+
+
+let sanjayRoom = {
+
+
+
+  table: "sanjay table",
+
+
+
+};
+
+
+
+console.log(this.sanjayRoom.table); //TypeError: Cannot read properties of undefined (reading 'table')
+
+
+
+console.log(sanjayRoom.table) //sanjay table
+
+
+
+
+
+
+
+// "this" inside a method
+
+
+
+
+
+
+
+var sanjayRoomtable = {
+
+
+
+  table: "sanjay table",
+
+
+
+
+
+
+
+  cleanTable() {
+
+
+
+    console.log(`clean ${this.table}`);
+
+
+
+  }
+
+
+
+};
+
+
+
+
+
+
+
+  console.log(sanjayRoom.table)//sanjay table
+
+
+
+  sanjayRoom.cleanTable()//clean sanjay table
+
+
+
+
+
+
+
+this.garage.cleanTable();
+
+
+
+
+
+
+
+console.log(this.table) //window table
+
+
+
+
+
+
+
+//hat is this ?
+
+
+
+ //regular function me wo globle obj ko represent karte
+
+
+
+
+
+
+
+// lekin jab ham kisi obj me method create karke bante
+
+
+
+// to wo use function ko represent karega
+
+
+
+// this is globle object
+
+
+
+
+
+
+
+// the js "this" keyword refer to the object it belong to
+
+
+
+// it has different values depending on where it is used
+
+
+
+
+
+
+
+// Alone , this refers to the global object
+
+
+
+console.log(this); // this is window obj
+
+
+
+
+
+
+
+//In a Regular function this refers to the global obj
+
+
+
+
+
+
+
+function sum(){
+
+
+
+
+
+
+
+    var add = 2+2
+
+
+
+
+
+
+
+    console.log(add)
+
+
+
+
+
+
+
+     console.log(this)//  global and labeary hai ye
+
+
+
+}
+
+
+
+
+
+
+
+sum()
+
+
+
+
+
+
+
+//In method , this refers to the owner object
+
+
+
+("use strict");
+
+
+
+const data = {
+
+
+
+  name: "sanjay gupta",
+
+
+
+
+
+
+
+  qualif: "cs",
+
+
+
+  //jab aap ek object ke ander ek method sum create karte ho aur use methode me console.log(this) use karte ho to
+
+
+
+  //  wo globle obj nahi hota jis object ke ander method bnaye hai
+
+
+
+  // wo use ko represent karega
+
+
+
+  sum: function () {
+
+
+
+    var add = 2 + 2;
+
+
+
+
+
+
+
+    console.log(add);
+
+
+
+
+
+
+
+    console.log(this);
+
+
+
+
+
+
+
+    console.log(this.name);
+
+
+
+
+
+
+
+    console.log(this.qualif);
+
+
+
+  },
+
+
+
+};
+
+
+
+
+
+
+
+data.sum(); //4
+
+
+
+
+
+
+
+//in  a function a strict mode this is undefined
+
+
+
+
+
+
+
+//"use strict";
+
+
+
+
+
+
+
+let getA = (a) => a;
+
+
+
+
+
+
+
+console.log(getA(1));
+
+
+
+
+
+
+
+let squre = (a) => a * a;
+
+
+
+console.log(squre(2));
+
+
+
+
+
+
+
+//another style to use function
+
+
+
+
+
+
+
+let square = (a) => { return a*a};
+
+
+
+console.log(square(2));
+
+
+
+
+
+
+
+//not passing any parameter
+
+
+
+var a = 2
+
+
+
+var square2 = (a) => { return a * a};
+
+
+
+console.log(square2(3));
+
+
+
+
+
+
+
+//use the _ style to create the function
+
+
+
+
+
+
+
+var a = 2;
+
+
+
+var square4 = () => { return a * a};
+
+
+
+console.log(square4(a));
+
+
+
+
+
+
+
+//settimeout function
+
+
+
+
+
+
+
+var x = function () {
+
+
+
+
+
+
+
+    var that = this   // use the var that store the this then work 1
+
+
+
+  this.value = 1;
+
+
+
+  setTimeout(function () {
+
+
+
+    this.value++;
+
+
+
+    console.log(that.value);
+
+
+
+  }, 1);
+
+
+
+};
+
+
+
+
+
+
+
+var xx = new x()
+
+
+
+
+
+
+
+console.log(xx)  // NaN  //x { value: 1 }
+
+
+
+
+
+
+
+var x = (...n) => {
+
+
+
+    console.log(n[0]);
+
+  
+
+    console.log(n[1]);
+
+  
+
+    console.log(n[2]);
+
+  
+
+  };
+
+  
+
+  
+
+  
+
+  x(1, 2, 3);
